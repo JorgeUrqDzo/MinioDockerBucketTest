@@ -1,0 +1,39 @@
+﻿@model List<MinioDockerBucketTest.Models.UserFiles>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+<hr />
+<p>@ViewBag.message</p>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>File</th>
+                <th>Link</th>
+            </tr>
+            <tbody>
+                @foreach (UserFiles x in @Model)
+                {
+                <tr>
+                    <td>@x.Id</td>
+                    <td>@x.FileName</td>
+                    <td>
+                        @Html.ActionLink("Descargar", "Download", new { filename = x.InternalName })
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
